@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import * as actions from "../../redux/contacts/contacts-actions";
+import actions from "../../redux/contacts/contacts-actions";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 
@@ -16,7 +16,7 @@ const useStyles = makeStyles({
 
 const ContactForm = ({ contacts, onAdd }) => {
   const classes = useStyles();
-  let item = {};
+  let item = { name: "", number: "" };
 
   const onInputChange = (event) => {
     item = { ...item, [event.target.id]: event.target.value };

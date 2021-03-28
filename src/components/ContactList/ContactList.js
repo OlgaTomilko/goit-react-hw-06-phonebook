@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import * as actions from "../../redux/contacts/contacts-actions";
+import actions from "../../redux/contacts/contacts-actions";
 import Button from "@material-ui/core/Button";
 
 const ContactList = ({ filter, contacts, onDelete }) => {
