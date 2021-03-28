@@ -17,8 +17,8 @@ const mapDispatchProps = (dispatch) => {
   };
 };
 
-// Filter.propTypes = {
-//   onInputFind: PropTypes.func.isRequired,
-// };
+Filter.propTypes = {
+  updateFilter: PropTypes.func.isRequired,
+};
 
 export default connect(null, mapDispatchProps)(Filter);

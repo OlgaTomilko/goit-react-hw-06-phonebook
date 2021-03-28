@@ -3,12 +3,17 @@ import { connect } from "react-redux";
 import actions from "../../redux/contacts/contacts-actions";
 import Button from "@material-ui/core/Button";
 
-const ContactList = ({ filter, contacts, onDelete }) => {
+const ContactList = ({ filter, contacts, onDelete, onClose }) => {
   const onFilterContacts = () => {
     const filterContacts = contacts.filter((contact) =>
       contact.name.toLowerCase().includes(filter.toLowerCase())
     );
     return filterContacts;
+  };
+
+  const handlerDelete = (event) => {
+    onDelete(event.currentTarget.id);
+    onClose();
   };
 
   return (
@@ -20,7 +25,7 @@ const ContactList = ({ filter, contacts, onDelete }) => {
             color="secondary"
             type="button"
             id={id}
-            onClick={(event) => onDelete(event.currentTarget.id)}
+            onClick={handlerDelete}
           >
             Delete
           </Button>
@@ -41,11 +46,11 @@ const mapDispatchProps = (dispatch) => ({
   onDelete: (value) => dispatch(actions.deleteContact(value)),
 });
 
-// ContactList.propTypes = {
-//   filter: PropTypes.string,
-//   contacts: PropTypes.arrayOf(PropTypes.object),
-//   onFilterContacts: PropTypes.func.isRequired,
-//   onDelete: PropTypes.func.isRequired,
-// };
+ContactList.propTypes = {
+  filter: PropTypes.string,
+  contacts: PropTypes.arrayOf(PropTypes.object),
+  onDelete: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchProps)(ContactList);

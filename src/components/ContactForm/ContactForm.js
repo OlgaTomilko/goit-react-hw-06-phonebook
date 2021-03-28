@@ -64,9 +64,9 @@ const mapDispatchProps = (dispatch) => {
   };
 };
 
-// ContactForm.propTypes = {
-//   onInputChange: PropTypes.func.isRequired,
-//   onButtonClick: PropTypes.func.isRequired,
-// };
+ContactForm.propTypes = {
+  contacts: PropTypes.arrayOf(PropTypes.object),
+  onAdd: PropTypes.func.isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchProps)(ContactForm);

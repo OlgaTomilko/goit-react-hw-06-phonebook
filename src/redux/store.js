@@ -1,56 +1,48 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { createStore, combineReducers } from "redux";
-import { composeWithDevTools } from "redux-devtools-extension";
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import logger from "redux-logger";
+// import { combineReducers } from "redux";
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
+import storage from "redux-persist/lib/storage";
 import contactsReducer from "./contacts/contacts-reducer";
 
-const rootReducer = combineReducers({
-  contacts: contactsReducer,
-});
+const contactsPersistConfige = {
+  key: "contacts",
+  storage,
+  blacklist: ["filter"],
+};
 
-//const store = createStore(rootReducer, composeWithDevTools());
+const middleware = [
+  ...getDefaultMiddleware({
+    serializableCheck: {
+      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+    },
+  }),
+  logger,
+];
+
+// const rootReducer = combineReducers({
+//   contacts: contactsReducer,
+// });
+
+// const persistedReducer = persistReducer(contactsPersistConfige, rootReducer);
+
 const store = configureStore({
-  reducer: rootReducer,
+  reducer: {
+    contacts: persistReducer(contactsPersistConfige, contactsReducer),
+  },
+  middleware,
   devTools: process.env.NODE_ENV === "development",
 });
-export default store;
 
-//===before===
-// const initialState = {
-//   contacts: {
-//     items: [],
-//     filter: "",
-//   },
-// };
+const persistor = persistStore(store);
 
-// const reducer = (state = initialState, { type, payload }) => {
-//   switch (type) {
-//     case "phonebook/Save_contact":
-//       return {
-//         ...state,
-//         contacts: {
-//           ...state.contacts,
-//           items: [...state.contacts.items, payload],
-//         },
-//       };
-
-//     case "phonebook/Update_filter": {
-//       return {
-//         ...state,
-//         contacts: {
-//           ...state.contacts,
-//           filter: payload,
-//         },
-//       };
-//     }
-//     case "phonebook/Delete_contact":
-//       return {
-//         ...state,
-//         contacts: {
-//           ...state.contacts,
-//           items: [...payload],
-//         },
-//       };
-//     default:
-//       return state;
-//   }
-// };
+export default { store, persistor };

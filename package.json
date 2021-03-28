@@ -1,8 +1,8 @@
 {
-  "name": "goit-react-hw-03-phonebook",
+  "name": "goit-react-hw-06-phonebook",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://OlgaTomilko.github.io/goit-react-hw-03-phonebook",
+  "homepage": "http://OlgaTomilko.github.io/goit-react-hw-06-phonebook",
   "dependencies": {
     "@material-ui/core": "^4.11.3",
     "@material-ui/styles": "^4.11.3",
@@ -16,6 +16,8 @@
     "react-redux": "^7.2.3",
     "react-scripts": "4.0.3",
     "redux": "^4.0.5",
+    "redux-logger": "^3.0.6",
+    "redux-persist": "^6.0.0",
     "uuid": "^8.3.2",
     "web-vitals": "^1.1.0"
   },
@@ -45,7 +47,5 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "redux-devtools-extension": "^2.13.9"
-  }
+  "devDependencies": {}
 }
