@@ -9,10 +9,11 @@ export const addContact = ({ name, number }) => ({
     number,
   },
 });
-export const deleteContact = (value) => ({
+export const deleteContact = (id) => ({
   type: actionsTypes.DELETE,
-  payload: value,
+  payload: id,
 });
+
 export const updateFilter = (value) => ({
   type: actionsTypes.UPDATE_FILTER,
   payload: value,

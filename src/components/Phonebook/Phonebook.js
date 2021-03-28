@@ -6,7 +6,7 @@ import ContactList from "../ContactList/ContactList";
 import Modal from "../Modal/Modal";
 import Button from "@material-ui/core/Button";
 
-export default function Phonebook(contacts, onAdd, onDelete) {
+export default function Phonebook() {
   return (
     <div>
       {/* {items.showModal && (
@@ -24,39 +24,13 @@ export default function Phonebook(contacts, onAdd, onDelete) {
         </Modal>
       )} */}
       <h1>Phonebook</h1>
-      <ContactForm
-      // onInputChange={handleInputChange}
-      // onButtonClick={handleButtonClick}
-      />
+      <ContactForm />
       <h2>Contacts</h2>
-      {/* <Filter onInputFind={handleInputFind} /> */}
       <Filter />
-      {/* <ContactList
-        filter={items.filter}
-        // contacts={items.contacts}
-        contacts={contacts}
-        onFilterContacts={filterContactsList}
-        onDelete={handleButtonDelete}
-      /> */}
       <ContactList />
     </div>
   );
 }
-
-// const mapStateToProps = (state) => {
-//   return {
-//     contacts: state.contacts,
-//   };
-// };
-
-// const mapDispatchProps = (dispatch) => {
-//   return {
-//     onAdd: (value) => dispatch(actions.addContact(value)),
-//     onDelete: () => dispatch(actions.deleteContact),
-//   };
-// };
-
-// export default connect(mapStateToProps, mapDispatchProps)(Phonebook);
 
 // ========== HOOK =============
 

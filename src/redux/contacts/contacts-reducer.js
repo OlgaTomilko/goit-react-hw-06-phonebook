@@ -6,7 +6,7 @@ const itemsReducer = (state = [], { type, payload }) => {
     case actionsTypes.SAVE:
       return [...state, payload];
     case actionsTypes.DELETE:
-      return [...payload];
+      return state.filter((contact) => contact.id !== payload);
     default:
       return state;
   }

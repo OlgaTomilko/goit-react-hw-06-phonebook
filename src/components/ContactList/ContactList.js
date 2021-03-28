@@ -11,13 +11,6 @@ const ContactList = ({ filter, contacts, onDelete }) => {
     return filterContacts;
   };
 
-  const handleButtonDelete = (event) => {
-    const filterContacts = contacts.filter(
-      (contact) => contact.id !== event.currentTarget.id
-    );
-    onDelete(filterContacts);
-  };
-
   return (
     <ul>
       {(filter ? onFilterContacts() : contacts).map(({ id, name, number }) => (
@@ -27,7 +20,7 @@ const ContactList = ({ filter, contacts, onDelete }) => {
             color="secondary"
             type="button"
             id={id}
-            onClick={handleButtonDelete}
+            onClick={(event) => onDelete(event.currentTarget.id)}
           >
             Delete
           </Button>

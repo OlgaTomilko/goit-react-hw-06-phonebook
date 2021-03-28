@@ -14,7 +14,7 @@ const useStyles = makeStyles({
   },
 });
 
-const ContactForm = ({ onAdd }) => {
+const ContactForm = ({ contacts, onAdd }) => {
   const classes = useStyles();
   let item = {};
 
@@ -22,8 +22,15 @@ const ContactForm = ({ onAdd }) => {
     item = { ...item, [event.target.id]: event.target.value };
   };
 
-  const onSubmit = () => {
-    onAdd(item);
+  const isAlreadyContact = () => {
+    const Names = contacts.map((contact) => contact.name);
+    return Names.includes(item.name);
+  };
+
+  const onSave = () => {
+    isAlreadyContact()
+      ? alert(`${item.name} is already in contacts.`)
+      : onAdd(item);
   };
 
   return (
@@ -37,12 +44,18 @@ const ContactForm = ({ onAdd }) => {
         color="primary"
         size="small"
         type="button"
-        onClick={onSubmit}
+        onClick={onSave}
       >
         Add contact
       </Button>
     </form>
   );
+};
+
+const mapStateToProps = (state) => {
+  return {
+    contacts: state.contacts.items,
+  };
 };
 
 const mapDispatchProps = (dispatch) => {
@@ -56,4 +69,4 @@ const mapDispatchProps = (dispatch) => {
 //   onButtonClick: PropTypes.func.isRequired,
 // };
 
-export default connect(null, mapDispatchProps)(ContactForm);
+export default connect(mapStateToProps, mapDispatchProps)(ContactForm);
